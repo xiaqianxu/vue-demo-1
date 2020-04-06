@@ -1,24 +1,16 @@
 <template>
-  <div>
-    {{n}}
-    <button @click="add()">+1</button>
-  </div>
+  <div class="red">这里是demo的内部{{message}}</div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      n: 0
-    };
-  },
-  methods: {
-    add() {
-      this.n += 1;
-    }
-  }
+  props: ["message"]
 };
 </script>
 
 <style scoped>
+.red {
+  color: red;
+  border: 1px solid red;
+}
 </style>

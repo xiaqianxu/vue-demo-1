@@ -1,37 +1,41 @@
-// import Vue from 'vue'
-// import App from './App.vue'
+// 引用完整版 Vue，方便讲解
+import Vue from "vue/dist/vue.js";
 
-// Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-// new Vue({
-//   render: h => h(App),
-// }).$mount('#app')
-// console.log(window.Vue)
-// console.log(window.Vue)
-import Demo from './Demo.vue'
-console.log(Demo.render)
-// eslint-disable-next-line no-undef
 new Vue({
-    el: '#app',
-    render(h) {
-        return h(Demo)
+    data: {
+        user: {
+            email: "fangyinghang@qq.com",
+            nickname: "方方1",
+            phone: "13812312312"
+        }
+    },
+    computed: {
+        displayName: {
+            get() {
+                const user = this.user
+                return user.nickname || user.email || user.phone
+            },
+            set(value) {
+                this.user.nickname = value
+            }
+        }
+    },
+    methods: {
+        add() {
+            this.displayName = "晴晴"
+        }
+    },
 
-    }
-    // data: {
-    //     n: 1
-    // },
-    // methods: {
-    //     add() {
-    //         this.n += 1;
-    //     }
-    // },
-    // //vue.runtime.min.js
-    // render(h) {
-    //     return h('div', [this.n, h('button', {
-    //         on: {
-    //             click: this.add
-    //         },
+    // DRY don't repeat yourself
+    // 不如用 computed 来计算 displayName
+    template: `<div>
+    {{displayName}}
+    <div>
+    {{displayName}}
+    <button @click="add">set</button>
+    </div>
+  </div>`,
 
-    //     }, '+1')])
-    // }
-})
+}).$mount("#app");
