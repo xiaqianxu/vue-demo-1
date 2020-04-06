@@ -21,28 +21,37 @@ new Vue({
                 createUser("楠楠", "女"),
                 createUser("长政", "男")
             ],
-            displayUsers: []
+            gender: ''
         }
     },
-    created() {
-        this.displayUsers = this.users
-    },
-    computed: {
 
+    computed: {
+        displayUsers() {
+            console.log(this.gender, "被计算了一次")
+            const hash = {
+                male: '男',
+                female: '女'
+            };
+            const {
+                users,
+                gender
+            } = this;
+            if (gender === "") {
+                return this.users;
+            } else if (gender === "male" || gender === "female") {
+                return users.filter(u => u.gender === hash[gender])
+            } else {
+                throw new Error("gender 不在列表中")
+            }
+
+        }
 
     },
 
     methods: {
-        showMale() {
-            this.displayUsers = this.users.filter(u => u.gender === "男")
-        },
-        showFemale() {
-            this.displayUsers = this.users.filter(u => u.gender === "女")
-        },
-        showAll() {
-            this.displayUsers = this.users
+        setGender(String) {
+            this.gender = String
         }
-
 
     },
 
@@ -50,7 +59,7 @@ new Vue({
     // 不如用 computed 来计算 displayName
     template: `
     <div>
-    <div><button @click="showAll">全部</button><button @click="showMale">男</button><button @click="showFemale">女</button></div>
+    <div><button @click="setGender('')">全部</button><button @click="setGender('male')">男</button><button @click="setGender('female')">女</button></div>
     <ul>
         <li v-for="u in displayUsers" :key="u.id">
         {{u.name}} - {{u.gender}}
