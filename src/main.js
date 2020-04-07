@@ -1,6 +1,6 @@
 // 引用完整版 Vue，方便讲解
 import Vue from "vue";
-import DirectiveTest from "@/components/DirectiveTest.vue"
+import MixinsTest from "@/components/MixinsTest.vue"
 
 Vue.config.productionTip = false;
 
@@ -14,7 +14,7 @@ Vue.config.productionTip = false;
 //     }
 // }
 new Vue({
-    render: h => h(DirectiveTest)
+    render: h => h(MixinsTest)
     //     data() {
     //         return {
     //             users: [
