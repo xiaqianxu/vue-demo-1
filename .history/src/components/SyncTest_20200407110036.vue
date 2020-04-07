@@ -1,8 +1,7 @@
 <template>
   <div>
       粑粑有{{total}}元
-        <!-- <Child :money="total" @update:money="total = $event"/> -->
-        <Child :money.sync="total"/>
+        <Child :money="total" @update:money="total = $event"/>
   </div>
 </template>
 
